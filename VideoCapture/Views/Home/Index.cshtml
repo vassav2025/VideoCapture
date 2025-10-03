@@ -1,0 +1,33 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Моя видеокамера</h2>
+   @if (!ViewBag.IsRunning)
+   {
+       using (Html.BeginForm("Start","Home"))
+       {
+           <text>
+               Список камер: @Html.DropDownList("deviceName", (List<SelectListItem>)ViewBag.DeviceList)
+               <br/>
+               <input type="submit" value="Начать показ"/>
+           </text>
+       }
+   }
+   else
+   {
+       using (Html.BeginForm("Stop", "Home"))
+       {
+
+           <text>
+               <input type="submit" value="Остановить показ"/>
+                <br/>
+               <img src="@Url.Action("Video")"/>
+
+           </text>
+
+       }
+   }
